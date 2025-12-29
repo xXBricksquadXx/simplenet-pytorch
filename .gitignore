@@ -1,0 +1,7 @@
+file:.gitignore
+.venv/
+__pycache__/
+*.pyc
+runs/
+data/
+.DS_Store
