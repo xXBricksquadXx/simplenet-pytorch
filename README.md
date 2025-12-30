@@ -25,7 +25,6 @@ This repo is intentionally small so you can iterate on:
 
 <div align="center">
   <a href="https://github.com/user-attachments/assets/d7d8404d-97d1-4ad7-9d43-0053f7c31fff">
-    <img src="assets/baseline-screenshot.png" alt="Baseline Demo" width="640">
   </a>
 </div>
 
