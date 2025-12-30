@@ -36,19 +36,45 @@ Notes:
 
 ---
 
+# **Findings** (chapter wrap-up)
+
+`Dataset + split`: `21 clean cats` + `21 clean fish` for training; `10 challenge cats` + `10 challenge fish` for validation.
+
+Baseline behavior (`Adam`, `LR=1e-3`, `ReLU`, `256→128`, `64×64`):
+
+training accuracy reaches `~1.0` quickly (the MLP can memorize the clean set)
+
+validation accuracy stays around `~0.50–0.55` on the `challenge split`
+
+What helped most:
+
+- regularization knobs (augmentation / smaller model / smaller images) reduced how fast the model memorized training examples and made validation loss less explosive.
+
+- What didn’t move the ceiling (with this tiny dataset):
+
+- swapping activation (ReLU → GELU) and modest architecture tweaks did not lift best validation accuracy above ~0.55.
+
+What failed / got unstable:
+
+- SGD with too-high LR (0.05) became noisy and sometimes collapsed (e.g., predicting a single class on both train/val).
+
+- Main takeaway: with a clean→challenge domain shift and a pixel-flattening MLP, generalization is the bottleneck; larger, more diverse data (or a CNN) is the next step.
+
+---
+
 ## Repo layout
 
 ```
-assets/                 # README cosmetics (NOT training data)
+assets/
   header-banner.png
   icon.png
   baseline.mp4
 
-data/                   # training/validation images (gitignored)
-  train/                # "clean" images (your convention)
+data/
+  train/                # "clean" images
     cat/
     fish/
-  val/                  # "challenge" images (your convention)
+  val/                  # "challenge" images
     cat/
     fish/
 
