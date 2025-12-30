@@ -26,14 +26,13 @@ A short terminal recording of the baseline run is included here:
 ▶ **Baseline video:** [assets/baseline-net.mp4](assets/baseline-net.mp4)
 
 <video width="640" height="480" autoplay loop muted>
-  <source src="assets/baseline-net.mp4" type="video/mp4">
+  <source src="https://github.com/user-attachments/assets/d7d8404d-97d1-4ad7-9d43-0053f7c31fff" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
 Notes:
 
 - GitHub may not autoplay MP4 inside the README; the link should open/download the file.
-- If the MP4 is too large for the repo, upload it to a GitHub Release/Issue and link the hosted URL instead.
 
 ---
 
