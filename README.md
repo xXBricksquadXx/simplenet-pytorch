@@ -23,9 +23,12 @@ This repo is intentionally small so you can iterate on:
 
 A short terminal recording of the baseline run is included here:
 
-- `assets/baseline.mp4`
+▶ **Baseline video:** [assets/baseline-net.mp4](assets/baseline-net.mp4)
 
-▶ **Baseline video:** [assets/baseline.mp4](assets/baseline-net.mp4)
+<video width="640" height="480" autoplay loop muted>
+  <source src="assets/baseline-net.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 Notes:
 
