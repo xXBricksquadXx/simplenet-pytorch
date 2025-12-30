@@ -94,11 +94,14 @@ def main():
         raise RuntimeError("CUDA requested but not available. Use --device cpu")
 
     data_cfg = DataConfig(
-        data_dir=args.data_dir,
-        image_size=args.image_size,
-        batch_size=args.batch_size,
-        num_workers=2,
-    )
+    data_dir=args.data_dir,
+    image_size=args.image_size,
+    batch_size=args.batch_size,
+    num_workers=2,
+    demo_mode=True,
+    demo_min_batches=20,
+)
+
     train_loader, val_loader, class_to_idx = build_dataloaders(data_cfg)
 
     model_cfg = SimpleNetConfig(
