@@ -25,7 +25,7 @@ A short terminal recording of the baseline run is included here:
 
 - `assets/baseline.mp4`
 
-▶ **Baseline video:** [assets/baseline.mp4](assets/baseline.mp4)
+▶ **Baseline video:** [assets/baseline.mp4](assets/baseline-net.mp4)
 
 Notes:
 
