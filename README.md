@@ -21,14 +21,13 @@ This repo is intentionally small so you can iterate on:
 
 ## Baseline demo (screen recording)
 
-A short terminal recording of the baseline run is included here:
+[![Watch the video](https://img.shields.io/badge/▶_Watch-Baseline_Video-blue?style=for-the-badge)](https://github.com/user-attachments/assets/d7d8404d-97d1-4ad7-9d43-0053f7c31fff)
 
-▶ **Baseline video:** [assets/baseline-net.mp4](assets/baseline-net.mp4)
-
-<video width="640" height="480" autoplay loop muted>
-  <source src="https://github.com/user-attachments/assets/d7d8404d-97d1-4ad7-9d43-0053f7c31fff" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<div align="center">
+  <a href="https://github.com/user-attachments/assets/d7d8404d-97d1-4ad7-9d43-0053f7c31fff">
+    <img src="assets/baseline-screenshot.png" alt="Baseline Demo" width="640">
+  </a>
+</div>
 
 Notes:
 
