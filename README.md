@@ -21,6 +21,8 @@ This repo is intentionally small so you can iterate on:
 
 ## Baseline demo (screen recording)
 
+▶ Baseline video: assets/baseline.mp4
+
 [![Watch the video](https://img.shields.io/badge/▶_Watch-Baseline_Video-blue?style=for-the-badge)](https://github.com/user-attachments/assets/d7d8404d-97d1-4ad7-9d43-0053f7c31fff)
 
 <div align="center">
