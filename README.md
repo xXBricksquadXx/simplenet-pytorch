@@ -19,18 +19,34 @@ This repo is intentionally small so you can iterate on:
 
 ---
 
+## Baseline demo (screen recording)
+
+A short terminal recording of the baseline run is included here:
+
+- `assets/baseline.mp4`
+
+▶ **Baseline video:** [assets/baseline.mp4](assets/baseline.mp4)
+
+Notes:
+
+- GitHub may not autoplay MP4 inside the README; the link should open/download the file.
+- If the MP4 is too large for the repo, upload it to a GitHub Release/Issue and link the hosted URL instead.
+
+---
+
 ## Repo layout
 
 ```
 assets/                 # README cosmetics (NOT training data)
   header-banner.png
   icon.png
+  baseline.mp4
 
 data/                   # training/validation images (gitignored)
-  train/                # "clean" images
+  train/                # "clean" images (your convention)
     cat/
     fish/
-  val/                  # "challenge" images
+  val/                  # "challenge" images (your convention)
     cat/
     fish/
 
@@ -53,7 +69,7 @@ requirements.txt
 Notes:
 
 - `data/` is for model training only.
-- `assets/` is for visuals (banners/icons/screenshots) so they never leak into training.
+- `assets/` is for visuals (banners/icons/screenshots/video) so they never leak into training.
 
 ---
 
@@ -63,7 +79,7 @@ Notes:
 python -m venv .venv
 
 # Windows (PowerShell)
-.\.venv\Scripts\Activate.ps1
+./.venv/Scripts/Activate.ps1
 
 # macOS/Linux
 source .venv/bin/activate
@@ -95,20 +111,32 @@ data/
     fish/  *.png
 ```
 
-chosen convention:
+Chosen convention:
 
 - `data/train/*` = **clean** examples
 - `data/val/*` = **challenge** examples
 
 ---
 
-## 3) Train
+## 3) Baseline run (no augmentation)
 
-Minimal smoke test:
+Dataset counts used:
+
+- `train/cat`: 21
+- `train/fish`: 21
+- `val/cat`: 10
+- `val/fish`: 10
+
+Baseline command:
 
 ```bash
-python train.py --data-dir data --device cpu --epochs 2 --batch-size 16 --image-size 64
+python train.py --data-dir data --device cpu --epochs 25 --batch-size 16 --image-size 64 --optimizer adam --lr 0.001 --activation relu --hidden-dims 256 128
 ```
+
+Observed behavior (expected for small data + domain shift):
+
+- training accuracy climbs rapidly to ~1.0
+- validation accuracy hovers around ~0.50–0.55 on the "challenge" split
 
 Outputs:
 
@@ -123,13 +151,13 @@ Outputs:
 Single file:
 
 ```bash
-python predict.py --image "data\val\cat\cat-challenge.png" --checkpoint "runs\simplenet_checkpoint.pt" --device cpu
+python predict.py --image "data/val/cat/cat-challenge-001.png" --checkpoint "runs/simplenet_checkpoint.pt" --device cpu
 ```
 
 Directory input (picks the first image in the folder):
 
 ```bash
-python predict.py --image "data\val\cat" --checkpoint "runs\simplenet_checkpoint.pt" --device cpu
+python predict.py --image "data/val/cat" --checkpoint "runs/simplenet_checkpoint.pt" --device cpu
 ```
 
 ---
@@ -167,25 +195,31 @@ This is what `predict.py` uses.
 
 ## 6) Demo mode augmentation (for tiny datasets)
 
-If you only have a few images per class, training will look "stuck" (e.g. accuracy ~0.50) because the model can’t learn much.
+If you only have a few images per class, training will overfit quickly.
 
 This repo supports a **demo mode** in `simplenet/data.py` that:
 
 - applies light random augmentations to the **train** split
-- (optionally) uses sampling-with-replacement so you get more than 1 batch per epoch
+- (optionally) uses sampling-with-replacement so you get more batches per epoch
 
 Recommended when you have < ~50 images per class.
 
 ---
 
-## 7) Experiments to try
+## 7) Controlled experiments (one variable at a time)
 
-- Wider layers: `--hidden-dims 512 256`
-- Narrower layers: `--hidden-dims 128 64`
-- Add depth: `--extra-layer`
-- Activation: `--activation gelu` (or `leakyrelu`, `elu`)
-- Optimizer: `--optimizer sgd --lr 0.01`
-- Batch size: `--batch-size 16` vs `64`
-- Image size: `--image-size 32` vs `128`
+Suggested sequence (keep everything else fixed when testing one change):
+
+- Augmentation (demo mode) on/off
+- Smaller model: `--hidden-dims 128 64`
+- Activation swap: `--activation gelu`
+- Optimizer swap: `--optimizer sgd --lr 0.01`
+- Image size: `--image-size 32` or `128`
 
 ---
+
+## Troubleshooting
+
+- VS Code shows missing imports but terminal runs: select the correct interpreter
+
+  - `Ctrl+Shift+P` → **Python: Select Interpreter** → choose `.venv/Scripts/python.exe`
